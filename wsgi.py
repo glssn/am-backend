@@ -1,3 +1,3 @@
-from backend import app
+import app
 #
 app = app
