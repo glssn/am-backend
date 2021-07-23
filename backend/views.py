@@ -7,7 +7,9 @@ api = Api(app)
 user_put_args = reqparse.RequestParser()
 user_put_args.add_argument("name", type=str, help="User name must be specified", required=True)
 
-users = {}
+users = {1: {"name": "nick"}}
+names = ['nick', 'james']
+emails = ['a@b.c', 'me@you.me']
 
 def abort_if_no_user(user_id):
     if user_id not in users:
@@ -56,7 +58,7 @@ class HelloApiHandler(Resource):
 
     return final_ret
 
-api.add_resource(HelloApiHandler, '/flask/hello')
+api.add_resource(HelloApiHandler, '/api')
 
 class User(Resource):
     def get(self, user_id):
@@ -69,10 +71,31 @@ class User(Resource):
         users[user_id] = args
         return users[user_id], 201 # successfully added user with information
 
-    def delete(serlf, user_id):
+    def delete(self, user_id):
         abort_if_no_user(user_id)
         del users[user_id]
         return 'user deleted', 204
 
+class Userlist(Resource):
+    def get(self):
+        return names, 200
+
+class Userlistput(Resource):
+    def put(self, name):
+        return names.append(name), 201
+
+class Emailtest(Resource):
+    def get(self):
+        return emails, 200
+
+class Emailtestput(Resource):
+    def put(self, email):
+        console.log(email)
+        return emails.append(email), 201
 
 api.add_resource(User, "/user/<int:user_id>")
+api.add_resource(Userlist, "/users")
+api.add_resource(Userlistput, "/users/<string:name>")
+
+api.add_resource(Emailtest, "/emails")
+api.add_resource(Emailtestput, "/emails/<string:email>")
