@@ -12,7 +12,10 @@ from flask_restful import Api, Resource, reqparse, abort
 app = Flask(__name__)
 
 import backend.views
-CORS(app)
+CORS(app, origins = [
+    'http://localhost:3000',
+    'https://allotment.netlify.app/'
+])
 
 if __name__ == "__main__":
     app.run(debug=True)
