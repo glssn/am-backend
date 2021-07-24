@@ -78,6 +78,7 @@ class User(Resource):
 
 class Userlist(Resource):
     def get(self):
+        names.headers.add('Access-Control-Allow-Origin', '*')
         return names, 200
 
 class Userlistput(Resource):
@@ -86,6 +87,7 @@ class Userlistput(Resource):
 
 class Emailtest(Resource):
     def get(self):
+        emails.headers.add('Access-Control-Allow-Origin', '*')
         return emails, 200
 
 class Emailtestput(Resource):
