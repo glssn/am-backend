@@ -8,7 +8,33 @@ api = Api(app)
 user_put_args = reqparse.RequestParser()
 user_put_args.add_argument("name", type=str, help="User name must be specified", required=True)
 
-users = {1: {"name": "nick"}}
+# users = {1: {"name": "nick"}}
+users = [
+{
+  "fullname": "John Doe",
+  "email": "johndoe@abc.com",
+  "parish": "True",
+  "phone": "0712876545"
+},
+{
+  "fullname": "Jane Doe",
+  "email": "janedoe@abc.com",
+  "parish": "False",
+  "phone": "0717672345"
+},
+{
+  "fullname": "Alice Doe",
+  "email": "alicedoe@abc.com",
+  "parish": "False",
+  "phone": "0712987345"
+},
+{
+  "fullname": "Bob Doe",
+  "email": "bobdoe@abc.com",
+  "parish": "True",
+  "phone": "0712123445"
+}
+]
 names = ['nick', 'james']
 emails = ['a@b.c', 'me@you.me']
 
@@ -77,10 +103,13 @@ class User(Resource):
         del users[user_id]
         return 'user deleted', 204
 
+# @app.route('/users', methods = ["GET", "POST"])
 class Userlist(Resource):
     def get(self):
-        response = names
+        response = users
         return response, 200
+    # def post(self):
+
 
 class Userlistput(Resource):
     def put(self, name):
