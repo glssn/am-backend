@@ -1,6 +1,6 @@
 from backend import app
 from flask_restful import Api, Resource, reqparse, abort
-from flask import send_from_directory
+from flask import send_from_directory, jsonify
 
 api = Api(app)
 
@@ -78,8 +78,9 @@ class User(Resource):
 
 class Userlist(Resource):
     def get(self):
-        names.headers.add('Access-Control-Allow-Origin', '*')
-        return names, 200
+        response = names
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
 
 class Userlistput(Resource):
     def put(self, name):
@@ -87,8 +88,9 @@ class Userlistput(Resource):
 
 class Emailtest(Resource):
     def get(self):
-        emails.headers.add('Access-Control-Allow-Origin', '*')
-        return emails, 200
+        response = emails
+        # response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
 
 class Emailtestput(Resource):
     def put(self, email):

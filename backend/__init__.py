@@ -10,9 +10,9 @@ from flask_cors import CORS
 from flask_restful import Api, Resource, reqparse, abort
 
 app = Flask(__name__)
+CORS(app)
 
 import backend.views
-CORS(app)
 
 if __name__ == "__main__":
     app.run(debug=True)
