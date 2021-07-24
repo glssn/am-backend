@@ -1,6 +1,7 @@
 from backend import app
 from flask_restful import Api, Resource, reqparse, abort
 from flask import send_from_directory, jsonify
+from flask_cors import CORS, cross_origin
 
 api = Api(app)
 
@@ -79,7 +80,6 @@ class User(Resource):
 class Userlist(Resource):
     def get(self):
         response = names
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 200
 
 class Userlistput(Resource):
@@ -91,7 +91,6 @@ class Emailtest(Resource):
         response = emails
         # response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 200
-
 class Emailtestput(Resource):
     def put(self, email):
         console.log(email)
